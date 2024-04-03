@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import '../HomeMainSection.css'
 import reviews from '../data/reviews';
 
-
 function HomeMainSection () {
     const [reviewsData, setReviews] = useState([]);
     useEffect(() => {

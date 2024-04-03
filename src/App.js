@@ -1,7 +1,8 @@
 import './App.css';
 import Homepage from './component/Homepage'
-import Productpage from './component/Productpage'
+import LoginPage from './component/LoginPage'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import SignupForm from './component/SignupForm';
 
 function App() {
   return (
@@ -9,15 +10,12 @@ function App() {
       <Routes>
         <Route path="/" element = {<Homepage />} />
         <Route path="/home" element = {<Homepage />} />
-        <Route path="/products" element = {<Productpage />} />
-        <Route path="/login" element = {<Homepage />} />
+        <Route path="/products" element = {<Homepage />} />
+        <Route path="/login" element = {<LoginPage />} />
+        <Route path="/signup" element = {<SignupForm />} />
       </Routes>
     </BrowserRouter>
-
-
   );
 }
 
 export default App;
-
-// change route path for products to where your product file is
