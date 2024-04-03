@@ -1,3 +1,5 @@
+// Created by: Mohammed Zaid Shaikh (UCID: 30173041) and Adam Yuen (UCID: 10187125)
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';

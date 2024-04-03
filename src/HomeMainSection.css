@@ -1,0 +1,16 @@
+.about-us{
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    margin: 20px;
+
+}
+
+.shop-now {
+    text-decoration: none;
+    background-color: #4CAF50;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 20px;
+    color: white;
+}

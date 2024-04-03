@@ -1,25 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import Homepage from './component/Homepage'
+import Productpage from './component/Productpage'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element = {<Homepage />} />
+        <Route path="/home" element = {<Homepage />} />
+        <Route path="/products" element = {<Productpage />} />
+        <Route path="/login" element = {<Homepage />} />
+      </Routes>
+    </BrowserRouter>
+
+
   );
 }
 
 export default App;
+
+// change route path for products to where your product file is
