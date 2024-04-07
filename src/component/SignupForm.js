@@ -1,16 +1,41 @@
 import Header from './Header'
 import Footer from './Footer'
 import { useNavigate } from 'react-router-dom';
+import {useState} from 'react'
 import '../LoginForm.css';
 
 function SignupForm() {
+    const [userAlreadyExists, userAlreadyExistsUpdate] = useState(0)
     const navigate = useNavigate();
 
     function handleButtonClick() {
         navigate("/login");
     }
 
-    function validateForm() {
+    function submitData(username, password, email) {
+        fetch('http://localhost:5000/signup', {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({'username': username, 'password': password, 'email': email})
+        })
+        .then(response => response.json()) 
+        .then(response => {
+            if (response.UserInDB) {
+                console.log("yes user")
+                userAlreadyExistsUpdate(1)
+                showMessage("User Already Exists");
+            }
+            else {
+                console.log("no user")
+                userAlreadyExistsUpdate(0)
+                showMessage("User Signup successful!");
+            }
+        })
+    }
+
+    async function validateForm() {
         var username = document.getElementById("username").value;
         var password = document.getElementById("password").value;
         var confirmPassword = document.getElementById("confirm-password").value;
@@ -34,9 +59,11 @@ function SignupForm() {
             showMessage(message);
             return false;
         }
+        
+        console.log(username, password, email)
+        let backendDupeTest = await submitData(username, password, email)
+        console.log(backendDupeTest + "79") 
 
-        showMessage("User Signup successful!");
-        return true;
         }
 
     function isValidEmail(email) {
@@ -47,6 +74,14 @@ function SignupForm() {
     function showMessage(message) {
     var messageBox = document.getElementById("message-signup"); // Updated to target the correct element
     messageBox.innerHTML = message.replace(/\n/g, "<br>");
+    }
+
+    console.log("current" + userAlreadyExists)
+    if (userAlreadyExists) {
+        console.log("1")
+    }
+    if (!userAlreadyExists) {
+        console.log("2")
     }
 
     return (

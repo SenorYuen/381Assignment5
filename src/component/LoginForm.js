@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {createContext, useContext, useState} from 'react';
 import '../LoginForm.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,6 +7,30 @@ function LoginForm() {
 
     function handleButtonClick() {
         navigate("/signup");
+    }
+
+    function submitData(username, password) {
+        fetch('http://localhost:5000/login', {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({'username': username, 'password': password})
+        })
+        .then(response => response.json()) 
+        .then(response => {
+            if (response.Authenticated) {
+                console.log("good login")
+                showMessage("Login Successful");
+                localStorage.setItem("authenticated", "1")
+                navigate("/Products")
+            }
+            else {
+                console.log("bad login")
+                showMessage("Login Unsuccessful");
+                localStorage.setItem("authenticated", "0")
+            }
+        })
     }
 
     function loginValidate() {
@@ -18,7 +42,7 @@ function LoginForm() {
             return false;
         }
 
-        showMessage("User Login successful!");
+        submitData(username, password)
         return true;
     }
 
